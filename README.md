@@ -1,5 +1,8 @@
 # CanadaSin
 
+[![Build Status](https://travis-ci.org/nicklayb/canada_sin.svg?branch=master)](https://travis-ci.org/nicklayb/canada_sin) [![Coverage Status](https://coveralls.io/repos/github/nicklayb/canada_sin/badge.svg?branch=master)](https://coveralls.io/github/nicklayb/canada_sin?branch=master)
+
+
 Elixir package that validates a Canadian SIN and can get the SIN's province
 
 ## Installation
