@@ -7,7 +7,7 @@ defmodule CanadaSinTest do
     assert CanadaSin.valid?(@valid_sin)
   end
 
-  @valid_sin 130692544
+  @valid_sin 130_692_544
   test "valid integer sin" do
     assert CanadaSin.valid?(@valid_sin)
   end

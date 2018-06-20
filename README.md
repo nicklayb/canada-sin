@@ -23,13 +23,13 @@ Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_do
 
 You can use the `CanadaSin.valid?/1` function to validate if the sin matches Canadian rules. You can pass in a string or a number, since first char `0` is not used in Canada.
 
-```
+```elixir
 CanadaSin.valid? "130 692 544"
 ```
 
 You can also pass in an integer directly
 
-```
+```elixir
 CanadaSin.valid? 130692544
 ```
 
@@ -38,7 +38,8 @@ CanadaSin.valid? 130692544
 You can also get valid provinces. Using the `CanadaSin.province/1` will return a list of atom of province codes
 
 **Note**: It does not validate the SIN, it only gives the province matching the first digit. It would return `[]` for an invalid province code.
-```
+
+```elixir
 CanadaSin.province ("211 111 111")
 [:QC]
 ```
