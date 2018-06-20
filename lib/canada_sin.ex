@@ -29,25 +29,27 @@ defmodule CanadaSin do
 
   """
   @spec valid?(integer) :: boolean
-  def valid?(number) when is_integer(number), do: valid? Integer.to_string(number)
+  def valid?(number) when is_integer(number), do: valid?(Integer.to_string(number))
 
   @sin_length 9
-  @spec valid?(String.t) :: boolean
+  @spec valid?(String.t()) :: boolean
   def valid?(string) do
     sanitized = sanitize(string)
-    if (String.length(sanitized) == @sin_length) do
+
+    if String.length(sanitized) == @sin_length do
       rem(compute(sanitized), 10) == 0
     else
       false
     end
   end
 
-  @spec compute(String.t) :: integer
+  @spec compute(String.t()) :: integer
   defp compute(string) do
-    numbers = string
-    |> String.codepoints
-    |> Enum.map(fn (char) -> safe_integer_parse(char) end)
-    |> Enum.with_index
+    numbers =
+      string
+      |> String.codepoints()
+      |> Enum.map(fn char -> safe_integer_parse(char) end)
+      |> Enum.with_index()
 
     Enum.reduce(numbers, 0, &compute_char/2)
   end
@@ -64,12 +66,11 @@ defmodule CanadaSin do
 
   defp sum_of_units(number) do
     number
-    |> Integer.to_string
-    |> String.codepoints
+    |> Integer.to_string()
+    |> String.codepoints()
     |> Enum.map(&safe_integer_parse/1)
-    |> Enum.reduce(0, fn (value, acc) -> acc + value end)
+    |> Enum.reduce(0, fn value, acc -> acc + value end)
   end
-
 
   @doc """
   Gets the province from the first digit
@@ -84,24 +85,24 @@ defmodule CanadaSin do
 
   """
   @spec province(integer) :: [atom]
-  def province(number) when is_integer(number), do: province(Integer.to_string number)
+  def province(number) when is_integer(number), do: province(Integer.to_string(number))
 
-  @spec province(String.t) :: [atom]
+  @spec province(String.t()) :: [atom]
   def province(string) when is_bitstring(string) do
-    Map.get @provinces, get_province_code(string)
+    Map.get(@provinces, get_province_code(string))
   end
 
-  @spec get_province_code(String.t) :: integer
+  @spec get_province_code(String.t()) :: integer
   defp get_province_code(string) do
     string
     |> sanitize
-    |> String.first
+    |> String.first()
     |> safe_integer_parse
   end
 
   defp sanitize(string) do
     string
-    |> String.trim
+    |> String.trim()
     |> String.replace(~r/\D/, "")
   end
 
